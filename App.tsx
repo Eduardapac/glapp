@@ -1,13 +1,22 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import ligado from './assets/pictures/symbol-on.png';
 import desligado from './assets/pictures/symbol-off.png';
 
 
 export default function App() {
-  let isActive = true;
+  const [isActive, setisActive] = useState(false);
+
+  function handleSymbol(){
+   setisActive((oldValue:boolean) => {
+     return !oldValue;
+   }) 
+  }
   return (
   <View style={isActive ? styles.containerOn : styles.containerOff}>
+    <TouchableOpacity onPress={handleSymbol}>
       <Image source={isActive ? ligado : desligado}></Image>
+      </TouchableOpacity>
   </View>
   );
 }
@@ -21,7 +30,7 @@ const styles = StyleSheet.create({
   },
   containerOff: {
     flex: 1,
-    backgroundColor: '#fffggggggggggggg',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
